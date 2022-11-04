@@ -28,13 +28,13 @@ if __name__ == '__main__':
     filenames = [
         'bnb.csv',
         'bitcoin.csv',
-        'CHZ.csv'
+        'CHZ.csv',
     ]
 
     links = [
         'https://coinmarketcap.com/th/currencies/bnb/',
         'https://coinmarketcap.com/th/currencies/bitcoin/',
-        'https://coinmarketcap.com/th/currencies/chiliz/'
+        'https://coinmarketcap.com/th/currencies/chiliz/',
     ]
 
     while True:
@@ -43,6 +43,5 @@ if __name__ == '__main__':
             data_ = CollectData(links[i])
             information = get_coin_information(data_)
             information = [day, date, times] + information 
-            print(information)
             add_row_csv(f'{filenames[i]}', information)
-        time.sleep(3)
+        time.sleep(15)

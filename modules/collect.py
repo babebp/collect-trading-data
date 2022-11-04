@@ -17,18 +17,20 @@ class CollectData:
     def get_price_percent(self):
         percent_updown = self.soup.find('div', {'class': 'sc-1prm8qw-0 cyZVgY priceTitle'})
         data = percent_updown.find('span', {'class': 'sc-15yy2pl-0 gEePkg'})
-        if percent_updown.find('span', {'class': 'icon-Caret-up'}):
-            return float(data.text[:-1].replace(',', '')) 
-        elif percent_updown.find('span', {'class': 'icon-Caret-down'}):
+        
+        if data.find('span', {'class': 'icon-Caret-down'}):
             return float(data.text[:-1].replace(',', '')) * - 1
+        elif data.find('span', {'class': 'icon-Caret-up'}):
+            return float(data.text[:-1].replace(',', '')) 
 
     def get_value_compare_with_market_percent(self):
         value_compare_with_market_percent = self.soup.find_all('div', {'class': 'statsItemRight'})  
         data = value_compare_with_market_percent[0].find('span', {'class': 'u2x6b4-0 chbrcp'})
-        if value_compare_with_market_percent[0].find('span', {'class': 'icon-Caret-up'}):     
-            return float(data.text[:-1].replace(',', '')) 
-        elif value_compare_with_market_percent[0].find('span', {'class': 'icon-Caret-down'}):
+
+        if data.find('span', {'class': 'icon-Caret-down'}):
             return float(data.text[:-1].replace(',', '')) * - 1
+        elif data.find('span', {'class': 'icon-Caret-up'}):     
+            return float(data.text[:-1].replace(',', '')) 
 
     def get_volume(self):
         volume = self.soup.find_all('div', {'class': 'statsItemRight'})  
@@ -38,7 +40,6 @@ class CollectData:
     def get_volume_percent(self):
         volume_percent = self.soup.find_all('div', {'class': 'statsItemRight'})  
         data = volume_percent[2].find('span', {'class': 'u2x6b4-0 chbrcp'})
-
 
         if data.find('span', {'class': 'icon-Caret-down'}):
             return float(data.text[:-1].replace(',', '')) * - 1
