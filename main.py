@@ -1,8 +1,9 @@
-from modules.collect import CollectData
-from modules.date_time import GetTime
-from csv import writer
-
 import time
+
+from csv import writer
+from modules.date_time import GetTime
+from modules.collect import CollectData
+from list_data import links_list as links, filenames_list as filenames
 
 def get_coin_information(data):
     
@@ -23,20 +24,6 @@ def add_row_csv(filename, lst):
         f.close()
 
 if __name__ == '__main__':
-    
-
-    filenames = [
-        'bnb.csv',
-        'bitcoin.csv',
-        'CHZ.csv',
-    ]
-
-    links = [
-        'https://coinmarketcap.com/th/currencies/bnb/',
-        'https://coinmarketcap.com/th/currencies/bitcoin/',
-        'https://coinmarketcap.com/th/currencies/chiliz/',
-    ]
-
     while True:
         for i in range(len(links)):
             day, date, times = GetTime().get_time()
