@@ -6,7 +6,7 @@ class CollectData:
     def __init__(self, link):
         self.link = link
         data = requests.get(self.link)
-        self.soup = bs4.BeautifulSoup(data.text)
+        self.soup = bs4.BeautifulSoup(data.text, features="html.parser")
         
 
     def get_price(self):
