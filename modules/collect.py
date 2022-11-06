@@ -18,11 +18,18 @@ class CollectData:
         percent_updown = self.soup.find('div', {'class': 'sc-1prm8qw-0 cyZVgY priceTitle'})
         data = percent_updown.find('span', {'class': 'sc-15yy2pl-0 gEePkg'})
         
-        if data.find('span', {'class': 'icon-Caret-down'}):
-            return float(data.text[:-1].replace(',', '')) * - 1
-        elif data.find('span', {'class': 'icon-Caret-up'}):
-            return float(data.text[:-1].replace(',', '')) 
-
+        try:
+            if data.find('span', {'class': 'icon-Caret-down'}):
+                return float(data.text[:-1].replace(',', '')) * - 1
+            elif data.find('span', {'class': 'icon-Caret-up'}):
+                return float(data.text[:-1].replace(',', '')) 
+        except:
+            data = percent_updown.find('span', {'class': 'sc-15yy2pl-0 feeyND'})
+            if data.find('span', {'class': 'icon-Caret-down'}):
+                return float(data.text[:-1].replace(',', '')) * - 1
+            elif data.find('span', {'class': 'icon-Caret-up'}):
+                return float(data.text[:-1].replace(',', ''))
+            
     def get_value_compare_with_market_percent(self):
         value_compare_with_market_percent = self.soup.find_all('div', {'class': 'statsItemRight'})  
         data = value_compare_with_market_percent[0].find('span', {'class': 'u2x6b4-0 chbrcp'})
