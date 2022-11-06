@@ -23,12 +23,17 @@ def add_row_csv(filename, lst):
         writer_object.writerow(lst)
         f.close()
 
+round_counter = 1
+
 if __name__ == '__main__':
     while True:
+        print(f'Round : {round_counter}')
         for i in range(len(links)):
             day, date, times = GetTime().get_time()
             data_ = CollectData(links[i])
             information = get_coin_information(data_)
             information = [day, date, times] + information 
             add_row_csv(f'{filenames[i]}', information)
-        time.sleep(15)
+            print(f'{filenames[i]} : {information}')
+        round_counter += 1
+        time.sleep(15 * 60)
